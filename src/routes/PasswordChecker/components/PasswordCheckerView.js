@@ -1,15 +1,20 @@
 import React from 'react';
-import DuckImage from '../assets/Duck.jpg';
 import './PasswordCheckerView.scss';
 
-export const PasswordCheckerView = () => (
-  <div>
-    <h4>Welcome!</h4>
-    <img
-      alt='This is a duck, because Redux!'
-      className='duck'
-      src={ DuckImage } />
-  </div>
-);
+export default class PasswordCheckerView extends React.Component {
+  onChange = e => {
+    console.log(e.target.value);
+    // check length
+    // check upper/lower/punctuation/number
+    // check common passwords
+  }
 
-export default PasswordCheckerView;
+  render () {
+    return (
+      <div>
+        <h4>Welcome!</h4>
+        <input type='password' onChange={ this.handleChange } />
+      </div>
+    );
+  }
+}
