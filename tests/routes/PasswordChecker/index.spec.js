@@ -1,14 +1,14 @@
-import HomeRoute from 'routes/Home';
+import PasswordCheckerRoute from 'routes/PasswordChecker';
 
-describe('(Route) Home', () => {
+describe('(Route) PasswordChecker', () => {
   let _component;
 
   beforeEach(() => {
-    _component = HomeRoute.component();
+    _component = PasswordCheckerRoute.component();
   });
 
   it('Should return a route configuration object', () => {
-    expect(typeof HomeRoute).to.equal('object');
+    expect(typeof PasswordCheckerRoute).to.equal('object');
   });
 
   it('Should define a route component', () => {

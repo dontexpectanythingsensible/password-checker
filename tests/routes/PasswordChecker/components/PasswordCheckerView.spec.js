@@ -1,12 +1,12 @@
 import React from 'react';
-import { HomeView } from 'routes/Home/components/HomeView';
+import { PasswordCheckerView } from 'routes/PasswordChecker/components/PasswordCheckerView';
 import { render } from 'enzyme';
 
-describe('(View) Home', () => {
+describe('(View) PasswordChecker', () => {
   let _component;
 
   beforeEach(() => {
-    _component = render(<HomeView />);
+    _component = render(<PasswordCheckerView />);
   });
 
   it('Renders a welcome message', () => {

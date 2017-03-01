@@ -17,10 +17,10 @@ describe('(Component) Header', () => {
   });
 
   describe('Navigation links...', () => {
-    it('Should render a Link to Home route', () => {
+    it('Should render a Link to PasswordChecker route', () => {
       expect(_wrapper.contains(
         <IndexLink activeClassName='route--active' to='/'>
-          Home
+            Password Strength Checker
         </IndexLink>
       )).to.be.true;
     });
