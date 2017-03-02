@@ -11,7 +11,7 @@ export default class PasswordChecker extends React.Component {
 
   render () {
     return (
-      <input type='password' onChange={ this.handleChange } />
+      <input type='password' onChange={ this.handleChange } placeholder='Your password' />
     );
   }
 }

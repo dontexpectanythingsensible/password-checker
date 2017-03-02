@@ -71,9 +71,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davezuko/react-redux-starter-kit.git"
+    "url": "git+https://github.com/dontexpectanythingsensible/password-checker"
   },
-  "author": "David Zukowski <david@zuko.me> (http://zuko.me)",
+  "author": "James Tease <james@jamestease.co.uk> (https://www.jamestease.co.uk)",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.17.0",
