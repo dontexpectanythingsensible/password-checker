@@ -1,20 +1,12 @@
 import React from 'react';
+import PasswordChecker from 'components/PasswordChecker';
 import './PasswordCheckerView.scss';
 
-export default class PasswordCheckerView extends React.Component {
-  onChange = e => {
-    console.log(e.target.value);
-    // check length
-    // check upper/lower/punctuation/number
-    // check common passwords
-  }
+export const PasswordCheckerView = () => (
+  <div>
+    <h4>Welcome!</h4>
+    <PasswordChecker />
+  </div>
+);
 
-  render () {
-    return (
-      <div>
-        <h4>Welcome!</h4>
-        <input type='password' onChange={ this.handleChange } />
-      </div>
-    );
-  }
-}
+export default PasswordCheckerView;

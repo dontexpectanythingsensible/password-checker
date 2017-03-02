@@ -10,8 +10,7 @@ describe('(View) PasswordChecker', () => {
   });
 
   it('Renders a welcome message', () => {
-    const welcome = _component.find('h4');
-    expect(welcome).to.exist;
-    expect(welcome.text()).to.match(/Welcome!/);
+    const input = _component.find('[type="password"]');
+    expect(input).to.exist;
   });
 });
