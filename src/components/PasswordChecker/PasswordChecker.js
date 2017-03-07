@@ -3,50 +3,147 @@ import React from 'react';
 import commonPasswords from 'services/commonpasswords';
 
 export default class PasswordChecker extends React.Component {
+  state = {
+    length: {},
+    numbers: {},
+    letters: {},
+    lowercase: {},
+    uppercase: {},
+    lettersAndNumbers: {},
+    word: {},
+    wordAndNumbers: {},
+    pattern: {},
+    obvious: {}
+  };
+
   checkLength (password) {
     if (password.length < 7) {
       console.log('v shortt');
+      this.setState({ length: { level: 'error', message: 'very short password' } });
     } else if (password.length < 12) {
       console.log('short');
+      this.setState({ length: { level: 'error', message: 'short password' } });
     } else if (password.length > 15) {
       console.log('long');
+      this.setState({ length: { level: 'good', message: 'password is nice and long' } });
     }
   }
 
   checkOnlyNumbers (password) {
-    return password.match(/^[0-9]*$/);
+    if (!!password.match(/^[0-9]*$/)) {
+      this.setState({
+        numbers: {
+          level: 'error',
+          message: 'password only numbers'
+        }
+      });
+    } else {
+      this.setState({ numbers: {} });
+    }
   }
 
   checkOnlyLetters (password) {
-    return password.match(/^[A-Za-z]*$/);
+    if(!!password.match(/^[A-Za-z]*$/)) {
+      this.setState({
+        letters: {
+          level: 'error',
+          message: 'password only letters'
+        }
+      });
+    } else {
+      this.setState({ letters: {} });
+    }
   }
 
   checkOnlyLowercase (password) {
-    return password.match(/^[a-z]*$/);
+    if (!!password.match(/^[a-z]*$/)) {
+      this.setState({
+        lowercase: {
+          level: 'error',
+          message: 'password only lower case'
+        }
+      });
+    } else {
+      this.setState({ lowercase: {} });
+    }
   }
 
   checkOnlyUppercase (password) {
-    return password.match(/^[A-Z]*$/);
+    if (!!password.match(/^[A-Z]*$/)) {
+      this.setState({
+        uppercase: {
+          level: 'error',
+          message: 'password only upper case'
+        }
+      });
+    } else {
+      this.setState({ uppercase: {} });
+    }
   }
 
   checkOnlyLettersAndNumbers (password) {
-    return password.match(/^[A-Za-z0-9]*$/);
+    if (!!password.match(/^[A-Za-z0-9]*$/)) {
+      this.setState({
+        lettersAndNumbers: {
+          level: 'warning',
+          message: 'password has no symbols'
+        }
+      });
+    } else {
+      this.setState({ lettersAndNumbers: {} });
+    }
   }
 
   checkIsWord (password) {
-    return password.match(/^[a-zA-Z]{1,16}$/);
+    if (!!password.match(/^[a-zA-Z]{1,16}$/)) {
+      this.setState({
+        word: {
+          level: 'error',
+          message: 'password is a dictionary word'
+        }
+      });
+    } else {
+      this.setState({ word: {} });
+    }
   }
 
   checkIsWordAndACoupleOfNumbers (password) {
-    return password.match(/^([a-zA-Z]+[0-9]+|[0-9]+[a-zA-Z]+)$/);
+    if (!!password.match(/^([a-zA-Z]+[0-9]+|[0-9]+[a-zA-Z]+)$/)) {
+      this.setState({
+        wordAndNumbers: {
+          level: 'error',
+          message: 'password is word and number'
+        }
+      });
+    } else {
+      this.setState({ wordAndNumbers: {} });
+    }
   }
 
   checkPattern (password) {
-    return password.match(/(.+)\1{1,}/);
+    if (!!password.match(/(.+)\1{2,}/)) {
+      this.setState({
+        pattern: {
+          level: 'warning',
+          message: 'password has a repeating pattern'
+        }
+      });
+    } else {
+      this.setState({ pattern: {} });
+    }
   }
 
   checkObvious (password) {
-    return commonPasswords.indexOf(password) > -1;
+    if (commonPasswords.indexOf(password) > -1) {
+      this.setState({
+        obvious: {
+          level: 'error',
+          message: 'password is one of the most common passwords'
+        }
+      });
+    } else {
+      this.setState({ obvious: {} });
+    }
   }
 
   handleChange = e => {
@@ -60,24 +157,33 @@ export default class PasswordChecker extends React.Component {
     //   outputTime: (time, input) => console.log(time, input),
     //   outputChecks: (checks, input) => console.log(checks, input)
     // }, e.target);
-    // check length
+
     this.checkLength(e.target.value);
-    console.log('only numbers', !!this.checkOnlyNumbers(e.target.value));
-    console.log('only letters', !!this.checkOnlyLetters(e.target.value));
-    console.log('only lower', !!this.checkOnlyLowercase(e.target.value));
-    console.log('only upper', !!this.checkOnlyUppercase(e.target.value));
-    console.log('no symbols', !!this.checkOnlyLettersAndNumbers(e.target.value));
-    console.log('its a word', !!this.checkIsWord(e.target.value));
-    console.log('its a word and nums', !!this.checkIsWordAndACoupleOfNumbers(e.target.value));
-    console.log('repeat', !!this.checkPattern(e.target.value));
-    console.log('obvious', this.checkObvious(e.target.value));
-    // check upper/lower/punctuation/number
-    // check common passwords
+    this.checkOnlyNumbers(e.target.value)
+    this.checkOnlyLetters(e.target.value)
+    this.checkOnlyLowercase(e.target.value)
+    this.checkOnlyUppercase(e.target.value)
+    this.checkOnlyLettersAndNumbers(e.target.value)
+    this.checkIsWord(e.target.value)
+    this.checkIsWordAndACoupleOfNumbers(e.target.value)
+    this.checkPattern(e.target.value)
+    this.checkObvious(e.target.value)
+
+    console.log(this.state);
+  }
+
+  renderErrors = error => {
+    return this.state[error].message
+      ? <div className={ this.state[error].level }>{ this.state[error].message }</div>
+      : ''
   }
 
   render () {
     return (
-      <input type='password' onChange={ this.handleChange } placeholder='Your password' />
+      <div>
+        <input type='password' onChange={ this.handleChange } placeholder='Your password' />
+        { Object.keys(this.state).map(this.renderErrors) }
+        </div>
     );
   }
 }
