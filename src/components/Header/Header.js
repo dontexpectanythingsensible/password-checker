@@ -13,12 +13,6 @@ export const Header = () => (
     <Link to='/generate' activeClassName='route--active'>
         Generate password
     </Link>
-
-    {' · '}
-    
-    <Link to='/counter' activeClassName='route--active'>
-      Counter
-    </Link>
   </div>
 );
 

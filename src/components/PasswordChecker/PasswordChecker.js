@@ -25,6 +25,8 @@ export default class PasswordChecker extends React.Component {
     } else if (password.length > 15) {
       console.log('long');
       this.setState({ length: { level: 'good', message: 'password is nice and long' } });
+    } else {
+      this.setState({ length: {} });
     }
   }
 
@@ -162,13 +164,13 @@ export default class PasswordChecker extends React.Component {
     console.log(this.state);
   }
 
-  renderErrors = error => {
+  renderErrors = (error, i) => {
     if (!error) {
       return null;
     }
 
     return this.state[error].message
-      ? <div className={ this.state[error].level }>{ this.state[error].message }</div>
+      ? <div className={ this.state[error].level } key={ i }>{ this.state[error].message }</div>
       : ''
   }
 
