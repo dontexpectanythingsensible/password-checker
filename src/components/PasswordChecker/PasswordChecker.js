@@ -1,5 +1,4 @@
 import React from 'react';
-// import hsimp from 'vendor/hsimp/hsimp.min';
 import commonPasswords from 'services/commonpasswords';
 
 export default class PasswordChecker extends React.Component {
@@ -148,15 +147,6 @@ export default class PasswordChecker extends React.Component {
 
   handleChange = e => {
     console.log(e.target.value);
-    // hsimp({
-    //   options: {
-    //     calculationsPerSecond: 1e10,
-    //     good: 31557600e3,
-    //     ok: 31557600
-    //   },
-    //   outputTime: (time, input) => console.log(time, input),
-    //   outputChecks: (checks, input) => console.log(checks, input)
-    // }, e.target);
 
     this.checkLength(e.target.value);
     this.checkOnlyNumbers(e.target.value)
@@ -173,6 +163,10 @@ export default class PasswordChecker extends React.Component {
   }
 
   renderErrors = error => {
+    if (!error) {
+      return null;
+    }
+
     return this.state[error].message
       ? <div className={ this.state[error].level }>{ this.state[error].message }</div>
       : ''

@@ -2,6 +2,7 @@
 import CoreLayout from '../layouts/CoreLayout';
 import PasswordChecker from './PasswordChecker';
 import CounterRoute from './Counter';
+import PasswordGenerator from './PasswordGenerator';
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -11,7 +12,8 @@ export const createRoutes = (store) => ({
   component   : CoreLayout,
   indexRoute  : PasswordChecker,
   childRoutes : [
-    CounterRoute(store)
+    CounterRoute(store),
+    PasswordGenerator
   ]
 });
 
