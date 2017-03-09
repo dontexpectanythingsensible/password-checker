@@ -31,7 +31,7 @@ export default class PasswordChecker extends React.Component {
   }
 
   checkOnlyNumbers (password) {
-    if (!!password.match(/^[0-9]*$/)) {
+    if (password.match(/^[0-9]*$/)) {
       this.setState({
         numbers: {
           level: 'error',
@@ -44,7 +44,7 @@ export default class PasswordChecker extends React.Component {
   }
 
   checkOnlyLetters (password) {
-    if(!!password.match(/^[A-Za-z]*$/)) {
+    if (password.match(/^[A-Za-z]*$/)) {
       this.setState({
         letters: {
           level: 'error',
@@ -57,7 +57,7 @@ export default class PasswordChecker extends React.Component {
   }
 
   checkOnlyLowercase (password) {
-    if (!!password.match(/^[a-z]*$/)) {
+    if (password.match(/^[a-z]*$/)) {
       this.setState({
         lowercase: {
           level: 'error',
@@ -70,7 +70,7 @@ export default class PasswordChecker extends React.Component {
   }
 
   checkOnlyUppercase (password) {
-    if (!!password.match(/^[A-Z]*$/)) {
+    if (password.match(/^[A-Z]*$/)) {
       this.setState({
         uppercase: {
           level: 'error',
@@ -83,7 +83,7 @@ export default class PasswordChecker extends React.Component {
   }
 
   checkOnlyLettersAndNumbers (password) {
-    if (!!password.match(/^[A-Za-z0-9]*$/)) {
+    if (password.match(/^[A-Za-z0-9]*$/)) {
       this.setState({
         lettersAndNumbers: {
           level: 'warning',
@@ -96,7 +96,7 @@ export default class PasswordChecker extends React.Component {
   }
 
   checkIsWord (password) {
-    if (!!password.match(/^[a-zA-Z]{1,16}$/)) {
+    if (password.match(/^[a-zA-Z]{1,16}$/)) {
       this.setState({
         word: {
           level: 'error',
@@ -109,7 +109,7 @@ export default class PasswordChecker extends React.Component {
   }
 
   checkIsWordAndACoupleOfNumbers (password) {
-    if (!!password.match(/^([a-zA-Z]+[0-9]+|[0-9]+[a-zA-Z]+)$/)) {
+    if (password.match(/^([a-zA-Z]+[0-9]+|[0-9]+[a-zA-Z]+)$/)) {
       this.setState({
         wordAndNumbers: {
           level: 'error',
@@ -122,7 +122,7 @@ export default class PasswordChecker extends React.Component {
   }
 
   checkPattern (password) {
-    if (!!password.match(/(.+)\1{2,}/)) {
+    if (password.match(/(.+)\1{2,}/)) {
       this.setState({
         pattern: {
           level: 'warning',
@@ -151,15 +151,15 @@ export default class PasswordChecker extends React.Component {
     console.log(e.target.value);
 
     this.checkLength(e.target.value);
-    this.checkOnlyNumbers(e.target.value)
-    this.checkOnlyLetters(e.target.value)
-    this.checkOnlyLowercase(e.target.value)
-    this.checkOnlyUppercase(e.target.value)
-    this.checkOnlyLettersAndNumbers(e.target.value)
-    this.checkIsWord(e.target.value)
-    this.checkIsWordAndACoupleOfNumbers(e.target.value)
-    this.checkPattern(e.target.value)
-    this.checkObvious(e.target.value)
+    this.checkOnlyNumbers(e.target.value);
+    this.checkOnlyLetters(e.target.value);
+    this.checkOnlyLowercase(e.target.value);
+    this.checkOnlyUppercase(e.target.value);
+    this.checkOnlyLettersAndNumbers(e.target.value);
+    this.checkIsWord(e.target.value);
+    this.checkIsWordAndACoupleOfNumbers(e.target.value);
+    this.checkPattern(e.target.value);
+    this.checkObvious(e.target.value);
 
     console.log(this.state);
   }
@@ -171,7 +171,7 @@ export default class PasswordChecker extends React.Component {
 
     return this.state[error].message
       ? <div className={ this.state[error].level } key={ i }>{ this.state[error].message }</div>
-      : ''
+      : '';
   }
 
   render () {
@@ -179,7 +179,7 @@ export default class PasswordChecker extends React.Component {
       <div>
         <input type='password' onChange={ this.handleChange } placeholder='Your password' />
         { Object.keys(this.state).map(this.renderErrors) }
-        </div>
+      </div>
     );
   }
 }
