@@ -108,7 +108,7 @@ export default class PasswordChecker extends React.Component {
     }
   }
 
-  checkIsWordAndACoupleOfNumbers (password) {
+  checkIsWordAndNumbers (password) {
     if (password.match(/^([a-zA-Z]+[0-9]+|[0-9]+[a-zA-Z]+)$/)) {
       this.setState({
         wordAndNumbers: {
@@ -148,8 +148,6 @@ export default class PasswordChecker extends React.Component {
   }
 
   handleChange = e => {
-    console.log(e.target.value);
-
     this.checkLength(e.target.value);
     this.checkOnlyNumbers(e.target.value);
     this.checkOnlyLetters(e.target.value);
@@ -157,11 +155,9 @@ export default class PasswordChecker extends React.Component {
     this.checkOnlyUppercase(e.target.value);
     this.checkOnlyLettersAndNumbers(e.target.value);
     this.checkIsWord(e.target.value);
-    this.checkIsWordAndACoupleOfNumbers(e.target.value);
+    this.checkIsWordAndNumbers(e.target.value);
     this.checkPattern(e.target.value);
     this.checkObvious(e.target.value);
-
-    console.log(this.state);
   }
 
   renderErrors = (error, i) => {

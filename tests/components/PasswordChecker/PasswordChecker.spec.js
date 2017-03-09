@@ -100,4 +100,54 @@ describe('(component) PasswordChecker', () => {
     expect(component.state('lettersAndNumbers').level).to.be.undefined;
     expect(component.state('lettersAndNumbers').message).to.be.undefined;
   });
+
+  it('should check if password is a word', () => {
+    expect(component.state('word').level).to.be.undefined;
+
+    component.instance().checkIsWord('test');
+    expect(component.state('word').level).to.match(/error/);
+    expect(component.state('word').message).to.match(/password is a dictionary word/);
+  });
+
+  it('should check if password is a word with numbers', () => {
+    expect(component.state('wordAndNumbers').level).to.be.undefined;
+
+    component.instance().checkIsWordAndNumbers('test123');
+    expect(component.state('wordAndNumbers').level).to.match(/error/);
+    expect(component.state('wordAndNumbers').message).to.match(/password is word and number/);
+
+    component.instance().checkIsWordAndNumbers('test');
+    expect(component.state('wordAndNumbers').level).to.be.undefined;
+    expect(component.state('wordAndNumbers').message).to.be.undefined;
+  });
+
+  it('should check if password has a pattern', () => {
+    expect(component.state('pattern').level).to.be.undefined;
+
+    component.instance().checkPattern('testestestest');
+    expect(component.state('pattern').level).to.match(/warning/);
+    expect(component.state('pattern').message).to.match(/password has a repeating pattern/);
+
+    component.instance().checkPattern('testeste');
+    expect(component.state('pattern').level).to.be.undefined;
+    expect(component.state('pattern').message).to.be.undefined;
+  });
+
+  it('should check if password is obvious', () => {
+    expect(component.state('obvious').level).to.be.undefined;
+
+    component.instance().checkObvious('password');
+    expect(component.state('obvious').level).to.match(/error/);
+    expect(component.state('obvious').message).to.match(/password is one of the most common passwords/);
+
+    component.instance().checkObvious('paswrod!12');
+    expect(component.state('obvious').level).to.be.undefined;
+    expect(component.state('obvious').message).to.be.undefined;
+  });
+
+  it('should render', () => {
+    expect(component.find('input')).to.exist;
+    expect(component.find('input').prop('type')).to.equal('password');
+    expect(component.find('input').prop('placeholder')).to.equal('Your password');
+  });
 });
