@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'components/Slider';
+import Ad from 'components/Ad';
 
 export function getRandomInt (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -34,6 +35,7 @@ export default class PasswordGeneratorView extends React.Component {
   render () {
     return (
       <div>
+        <Ad />
         <span>{ this.state.password }</span>
 
         <Slider

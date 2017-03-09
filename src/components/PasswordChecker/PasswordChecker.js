@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import commonPasswords from 'services/commonpasswords';
 
 export default class PasswordChecker extends React.Component {
@@ -17,13 +18,10 @@ export default class PasswordChecker extends React.Component {
 
   checkLength (password) {
     if (password.length < 7) {
-      console.log('v shortt');
       this.setState({ length: { level: 'error', message: 'very short password' } });
     } else if (password.length < 12) {
-      console.log('short');
       this.setState({ length: { level: 'error', message: 'short password' } });
     } else if (password.length > 15) {
-      console.log('long');
       this.setState({ length: { level: 'good', message: 'password is nice and long' } });
     } else {
       this.setState({ length: {} });
@@ -39,7 +37,10 @@ export default class PasswordChecker extends React.Component {
         }
       });
     } else {
-      this.setState({ numbers: {} });
+      this.setState({
+        numbers: {
+        }
+      });
     }
   }
 
@@ -52,7 +53,10 @@ export default class PasswordChecker extends React.Component {
         }
       });
     } else {
-      this.setState({ letters: {} });
+      this.setState({
+        letters: {
+        }
+      });
     }
   }
 
@@ -86,12 +90,17 @@ export default class PasswordChecker extends React.Component {
     if (password.match(/^[A-Za-z0-9]*$/)) {
       this.setState({
         lettersAndNumbers: {
-          level: 'warning',
+          level: 'error',
           message: 'password has no symbols'
         }
       });
     } else {
-      this.setState({ lettersAndNumbers: {} });
+      this.setState({
+        lettersAndNumbers: {
+          level: 'good',
+          message: 'Password contains symbols'
+        }
+      });
     }
   }
 
@@ -147,17 +156,33 @@ export default class PasswordChecker extends React.Component {
     }
   }
 
+  checkMixture (password) {
+    if (password.length > 1 &&
+        this.state.numbers.level !== 'error' &&
+        this.state.letters.level !== 'error' &&
+        this.state.wordAndNumbers.level !== 'error') {
+      this.setState({ mixture: { level: 'good', message: 'Mixture of letters and numbers' } });
+    } else {
+      this.setState({ mixture: {} });
+    }
+  }
+
   handleChange = e => {
-    this.checkLength(e.target.value);
-    this.checkOnlyNumbers(e.target.value);
-    this.checkOnlyLetters(e.target.value);
-    this.checkOnlyLowercase(e.target.value);
-    this.checkOnlyUppercase(e.target.value);
-    this.checkOnlyLettersAndNumbers(e.target.value);
-    this.checkIsWord(e.target.value);
-    this.checkIsWordAndNumbers(e.target.value);
-    this.checkPattern(e.target.value);
-    this.checkObvious(e.target.value);
+    const password = e.target.value;
+
+    this.checkLength(password);
+    this.checkOnlyNumbers(password);
+    this.checkOnlyLetters(password);
+    this.checkOnlyLowercase(password);
+    this.checkOnlyUppercase(password);
+    this.checkOnlyLettersAndNumbers(password);
+    this.checkIsWord(password);
+    this.checkIsWordAndNumbers(password);
+    this.checkPattern(password);
+    this.checkObvious(password);
+
+    // hack - make sure letters/numbers state has been set before calling mix
+    setTimeout(() => this.checkMixture(password));
   }
 
   renderErrors = (error, i) => {
@@ -165,8 +190,14 @@ export default class PasswordChecker extends React.Component {
       return null;
     }
 
+    const level = `message--${ this.state[error].level }`;
+
+    const classes = classnames('message', {
+      [level]: true
+    });
+
     return this.state[error].message
-      ? <div className={ this.state[error].level } key={ i }>{ this.state[error].message }</div>
+      ? <div className={ classes } key={ i }>{ this.state[error].message }</div>
       : '';
   }
 

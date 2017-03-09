@@ -1,4 +1,3 @@
-@import 'base';
 @import '~normalize.css/normalize';
 
 // Some best-practice CSS that's useful for most apps
@@ -19,3 +18,5 @@ body {
 *:after {
   box-sizing: inherit;
 }
+
+@import 'base';
