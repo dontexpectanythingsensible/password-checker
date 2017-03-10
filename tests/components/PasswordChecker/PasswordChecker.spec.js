@@ -89,16 +89,16 @@ describe('(component) PasswordChecker', () => {
     expect(component.state('lettersAndNumbers').level).to.be.undefined;
 
     component.instance().checkOnlyLettersAndNumbers('TEST');
-    expect(component.state('lettersAndNumbers').level).to.match(/warning/);
+    expect(component.state('lettersAndNumbers').level).to.match(/error/);
     expect(component.state('lettersAndNumbers').message).to.match(/password has no symbols/);
 
     component.instance().checkOnlyLettersAndNumbers('TEST123');
-    expect(component.state('lettersAndNumbers').level).to.match(/warning/);
+    expect(component.state('lettersAndNumbers').level).to.match(/error/);
     expect(component.state('lettersAndNumbers').message).to.match(/password has no symbols/);
 
     component.instance().checkOnlyLettersAndNumbers('TEST%');
-    expect(component.state('lettersAndNumbers').level).to.be.undefined;
-    expect(component.state('lettersAndNumbers').message).to.be.undefined;
+    expect(component.state('lettersAndNumbers').level).to.match(/good/);
+    expect(component.state('lettersAndNumbers').message).to.match(/Password contains symbols/);
   });
 
   it('should check if password is a word', () => {
