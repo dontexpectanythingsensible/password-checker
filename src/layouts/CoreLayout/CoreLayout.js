@@ -11,14 +11,15 @@ export default class CoreLayout extends React.Component {
   };
 
   render () {
-    const classes = classnames('container', {
-      [this.props.strength]: true
+    const level = `strength--${ [this.props.strength] }`;
+    const classes = classnames('core-layout', {
+      [level]: true
     });
 
     return (
       <div className={ classes }>
         <Header />
-        <div className='core-layout__viewport'>
+        <div className='core-layout__viewport container'>
           { this.props.children }
         </div>
       </div>
