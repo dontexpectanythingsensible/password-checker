@@ -7,8 +7,6 @@ export const Header = () => (
       Password Strength Checker
     </IndexLink>
 
-    {' · '}
-
     <Link to='/generate' activeClassName='route--active'>
         Generate password
     </Link>

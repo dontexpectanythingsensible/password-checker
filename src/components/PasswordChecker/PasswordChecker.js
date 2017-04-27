@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import commonPasswords from 'services/commonpasswords';
+import moment from 'moment';
 
 export default class PasswordChecker extends React.Component {
   static propTypes = {
@@ -17,7 +18,9 @@ export default class PasswordChecker extends React.Component {
     word: {},
     wordAndNumbers: {},
     pattern: {},
-    obvious: {}
+    obvious: {},
+    password: '',
+    time: 0
   };
 
   // TODO: split errors into seperate file
@@ -172,8 +175,37 @@ export default class PasswordChecker extends React.Component {
     }
   }
 
+  calculateTimeToCrack (password) {
+    // totally accurate
+    let complexity = 0;
+
+    if (/[a-z]/.test(password)) {
+      complexity += 26;
+    }
+    if (/[A-Z]/.test(password)) {
+      complexity += 26;
+    }
+    if (/[0-9]/.test(password)) {
+      complexity += 10;
+    }
+
+    // ignores unicode etc
+    if (/[^A-z0-9]/.test(password)) {
+      complexity += 32;
+    }
+
+    const cpuSpeed = 2800000000; // rough calcs per ms of a cpu, 2.8mhz
+    const combinations = Math.pow(complexity, password.length);
+    const millisecondsToCrack = combinations / cpuSpeed;
+console.log(millisecondsToCrack);
+
+    return millisecondsToCrack;
+  }
+
   handleChange = e => {
     const password = e.target.value;
+
+    this.setState({ password });
 
     this.checkLength(password);
     this.checkOnlyNumbers(password);
@@ -188,6 +220,7 @@ export default class PasswordChecker extends React.Component {
 
     // hack - make sure letters/numbers state has been set before calling mix
     setTimeout(() => this.checkMixture(password));
+    this.setState({ time: this.calculateTimeToCrack(password) });
   }
 
   componentWillUpdate (_nextProps, nextState) {
@@ -220,16 +253,45 @@ export default class PasswordChecker extends React.Component {
     });
 
     return this.state[error].message
-      ? <div className={ classes } key={ i }><div className='message__status' />{ this.state[error].message }</div>
+      ? <div className={ classes } key={ i }>{ this.state[error].message }</div>
       : '';
   }
 
+  toCenturies (ms) {
+    // TODO: fix plurals
+    let time = Math.floor(ms / 3154000000000);
+    let suffix = 'centuries';
+
+    if (time > 9999) {
+      suffix = 'million years';
+      time = Math.floor(time / 10000);
+    } else if (time > 99) {
+      suffix = 'millenia';
+      time = Math.floor(time / 100);
+    }
+
+    return `${ time } ${ suffix }`;
+  }
+
   render () {
+    const msInCenturies = 3154000000000;
+    let time = this.state.time;
+    if (time > msInCenturies) {
+      time = this.toCenturies(time);
+    } else {
+      time = moment.duration(this.state.time).humanize();
+    }
+
     return (
       <div>
         <input className='password__checker' type='password'
           onChange={ this.handleChange } placeholder='Your password' />
-        { Object.keys(this.state).map(this.renderErrors) }
+
+        { this.state.password.length
+          ? <div className='message__container'>{ Object.keys(this.state).map(this.renderErrors) }</div>
+          : null
+        }
+        { this.state.time > 0 ? time : null }
       </div>
     );
   }
