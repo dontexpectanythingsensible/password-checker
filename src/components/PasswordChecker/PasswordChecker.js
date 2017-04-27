@@ -3,6 +3,10 @@ import classnames from 'classnames';
 import commonPasswords from 'services/commonpasswords';
 
 export default class PasswordChecker extends React.Component {
+  static propTypes = {
+    passwordUpdate: React.PropTypes.func
+  };
+
   state = {
     length: {},
     numbers: {},
@@ -185,13 +189,31 @@ export default class PasswordChecker extends React.Component {
     setTimeout(() => this.checkMixture(password));
   }
 
+  componentWillUpdate (_nextProps, nextState) {
+    // is set really worth it?
+    const level = new Set();
+
+    Object.keys(nextState).map(error => {
+      if (nextState[error].level) {
+        level.add(nextState[error].level);
+      }
+    });
+
+    if (level.has('error')) {
+      this.props.passwordUpdate('error');
+    } else if (level.has('good')) {
+      this.props.passwordUpdate('good');
+    } else {
+      this.props.passwordUpdate('');
+    }
+  }
+
   renderErrors = (error, i) => {
     if (!error) {
       return null;
     }
 
     const level = `message--${ this.state[error].level }`;
-
     const classes = classnames('message', {
       [level]: true
     });
@@ -204,7 +226,7 @@ export default class PasswordChecker extends React.Component {
   render () {
     return (
       <div>
-        <input className="password__checker" type='password' onChange={ this.handleChange } placeholder='Your password' />
+        <input className='password__checker' type='password' onChange={ this.handleChange } placeholder='Your password' />
         { Object.keys(this.state).map(this.renderErrors) }
       </div>
     );

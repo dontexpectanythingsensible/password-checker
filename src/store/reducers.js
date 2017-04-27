@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import locationReducer from './location';
+import strengthReducer from './strength';
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     location: locationReducer,
+    strength: strengthReducer,
     ...asyncReducers
   });
 };

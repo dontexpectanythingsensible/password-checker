@@ -1,3 +1,7 @@
 import PasswordChecker from './PasswordChecker';
+import PasswordCheckerContainer from './PasswordCheckerContainer';
 
-export default PasswordChecker;
+export {
+    PasswordCheckerContainer as default,
+    PasswordChecker
+};
