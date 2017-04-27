@@ -1,6 +1,6 @@
 .core-layout {
   transition: background-color 0.5s linear;
+  text-align: center;
+  height: 100%;
+  background: $blue;
 }
-
-@import 'password';
-@import 'strength';

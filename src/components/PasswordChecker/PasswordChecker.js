@@ -20,13 +20,14 @@ export default class PasswordChecker extends React.Component {
     obvious: {}
   };
 
+  // TODO: split errors into seperate file
   checkLength (password) {
     if (password.length < 7) {
-      this.setState({ length: { level: 'error', message: 'very short password' } });
+      this.setState({ length: { level: 'error', message: 'Very short password' } });
     } else if (password.length < 12) {
-      this.setState({ length: { level: 'error', message: 'short password' } });
+      this.setState({ length: { level: 'error', message: 'Short password' } });
     } else if (password.length > 15) {
-      this.setState({ length: { level: 'good', message: 'password is nice and long' } });
+      this.setState({ length: { level: 'good', message: 'Your password is nice and long' } });
     } else {
       this.setState({ length: {} });
     }
@@ -37,7 +38,7 @@ export default class PasswordChecker extends React.Component {
       this.setState({
         numbers: {
           level: 'error',
-          message: 'password only numbers'
+          message: 'Password only numbers'
         }
       });
     } else {
@@ -53,7 +54,7 @@ export default class PasswordChecker extends React.Component {
       this.setState({
         letters: {
           level: 'error',
-          message: 'password only letters'
+          message: 'Password only letters'
         }
       });
     } else {
@@ -69,7 +70,7 @@ export default class PasswordChecker extends React.Component {
       this.setState({
         lowercase: {
           level: 'error',
-          message: 'password only lower case'
+          message: 'Password only lower case'
         }
       });
     } else {
@@ -82,7 +83,7 @@ export default class PasswordChecker extends React.Component {
       this.setState({
         uppercase: {
           level: 'error',
-          message: 'password only upper case'
+          message: 'Password only upper case'
         }
       });
     } else {
@@ -95,7 +96,7 @@ export default class PasswordChecker extends React.Component {
       this.setState({
         lettersAndNumbers: {
           level: 'error',
-          message: 'password has no symbols'
+          message: 'Password has no symbols'
         }
       });
     } else {
@@ -113,7 +114,7 @@ export default class PasswordChecker extends React.Component {
       this.setState({
         word: {
           level: 'error',
-          message: 'password is a dictionary word'
+          message: 'Password is a dictionary word'
         }
       });
     } else {
@@ -126,7 +127,7 @@ export default class PasswordChecker extends React.Component {
       this.setState({
         wordAndNumbers: {
           level: 'error',
-          message: 'password is word and number'
+          message: 'Password is word and number'
         }
       });
     } else {
@@ -139,7 +140,7 @@ export default class PasswordChecker extends React.Component {
       this.setState({
         pattern: {
           level: 'warning',
-          message: 'password has a repeating pattern'
+          message: 'Password has a repeating pattern'
         }
       });
     } else {
@@ -152,7 +153,7 @@ export default class PasswordChecker extends React.Component {
       this.setState({
         obvious: {
           level: 'error',
-          message: 'password is one of the most common passwords'
+          message: 'Password is one of the most common passwords'
         }
       });
     } else {
@@ -165,7 +166,7 @@ export default class PasswordChecker extends React.Component {
         this.state.numbers.level !== 'error' &&
         this.state.letters.level !== 'error' &&
         this.state.wordAndNumbers.level !== 'error') {
-      this.setState({ mixture: { level: 'good', message: 'Mixture of letters and numbers' } });
+      this.setState({ mixture: { level: 'good', message: 'Good mixture of letters and numbers' } });
     } else {
       this.setState({ mixture: {} });
     }
@@ -219,14 +220,15 @@ export default class PasswordChecker extends React.Component {
     });
 
     return this.state[error].message
-      ? <div className={ classes } key={ i }>{ this.state[error].message }</div>
+      ? <div className={ classes } key={ i }><div className='message__status' />{ this.state[error].message }</div>
       : '';
   }
 
   render () {
     return (
       <div>
-        <input className='password__checker' type='password' onChange={ this.handleChange } placeholder='Your password' />
+        <input className='password__checker' type='password'
+          onChange={ this.handleChange } placeholder='Your password' />
         { Object.keys(this.state).map(this.renderErrors) }
       </div>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import { IndexLink, Link } from 'react-router';
 
 export const Header = () => (
-  <div>
+  <nav className='nav'>
     <IndexLink to='/' activeClassName='route--active'>
       Password Strength Checker
     </IndexLink>
@@ -12,7 +12,7 @@ export const Header = () => (
     <Link to='/generate' activeClassName='route--active'>
         Generate password
     </Link>
-  </div>
+  </nav>
 );
 
 export default Header;
