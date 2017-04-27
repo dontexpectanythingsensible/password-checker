@@ -261,13 +261,21 @@ console.log(millisecondsToCrack);
     // TODO: fix plurals
     let time = Math.floor(ms / 3154000000000);
     let suffix = 'centuries';
+    if (time < 2) {
+      suffix = 'century';
+    }
 
     if (time > 9999) {
-      suffix = 'million years';
       time = Math.floor(time / 10000);
+      suffix = 'million years';
     } else if (time > 99) {
-      suffix = 'millenia';
       time = Math.floor(time / 100);
+
+      if (time > 1) {
+        suffix = 'millenia';
+      } else {
+        suffix = 'millenium';
+      }
     }
 
     return `${ time } ${ suffix }`;
