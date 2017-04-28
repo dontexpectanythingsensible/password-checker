@@ -36,10 +36,10 @@ export default class PasswordGeneratorView extends React.Component {
     return (
       <div>
         <Ad />
-        <span>{ this.state.password }</span>
+        <span className='password__generated'>{ this.state.password }</span>
 
         <Slider
-          label='Length of password'
+          label='Password length'
           step='1'
           min='8'
           max='64'

@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from '../../components/Header';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 import classnames from 'classnames';
 
-import '../../styles/core.scss';
+import 'styles/core.scss';
 
 export default class CoreLayout extends React.Component {
   static propTypes = {
@@ -23,6 +24,8 @@ export default class CoreLayout extends React.Component {
         <div className='core-layout__viewport container'>
           { this.props.children }
         </div>
+
+        <Footer />
       </div>
     );
   }

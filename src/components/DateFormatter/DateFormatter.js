@@ -41,7 +41,16 @@ export default class DateFormat extends React.Component {
       suffix = 'century';
     }
 
-    if (time > 9999) {
+    if (time > 99999999999999) {
+      time = Math.floor(time / 1000000000000000);
+      suffix = 'quadrillion years';
+    } else if (time > 9999999999) {
+      time = Math.floor(time / 10000000000);
+      suffix = 'trillion years';
+    } else if (time > 999999) {
+      time = Math.floor(time / 1000000);
+      suffix = 'billion years';
+    } else if (time > 9999) {
       time = Math.floor(time / 10000);
       suffix = 'million years';
     } else if (time > 99) {
@@ -52,6 +61,10 @@ export default class DateFormat extends React.Component {
       } else {
         suffix = 'millenium';
       }
+    }
+
+    if (time > 10000000000000000000000) {
+      return 'a very long time indeed';
     }
 
     if (time > 999) {
@@ -91,7 +104,7 @@ export default class DateFormat extends React.Component {
 
       return (
         <div className='password__time'>It would take
-          <span className='password__time-to-crack'>{ time }</span> to crack your password</div>
+          <span className='password__time-to-crack'> { time } </span> to crack your password</div>
       );
     }
 
