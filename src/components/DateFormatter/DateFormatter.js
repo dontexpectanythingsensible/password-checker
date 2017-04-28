@@ -41,7 +41,7 @@ export default class DateFormat extends React.Component {
       suffix = 'century';
     }
 
-    if (time > 99999999999999) {
+    if (time > 100000000000000) {
       time = Math.floor(time / 1000000000000000);
       suffix = 'quadrillion years';
     } else if (time > 9999999999) {
