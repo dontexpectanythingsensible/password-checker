@@ -1,6 +1,6 @@
 {
   "name": "passwords-checker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Check your password strength and generate passwords",
   "main": "index.js",
   "engines": {
