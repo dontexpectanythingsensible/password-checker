@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const Slider = props => (
   <div className='slider'>
@@ -23,10 +24,10 @@ export const Slider = props => (
 );
 
 Slider.propTypes = {
-  label: React.PropTypes.string,
-  value: React.PropTypes.number.isRequired,
-  step: React.PropTypes.string.isRequired,
-  min: React.PropTypes.string.isRequired,
-  max: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number.isRequired]).isRequired,
-  onChange: React.PropTypes.func.isRequired
+  label: PropTypes.string,
+  value: PropTypes.number.isRequired,
+  step: PropTypes.string.isRequired,
+  min: PropTypes.string.isRequired,
+  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number.isRequired]).isRequired,
+  onChange: PropTypes.func.isRequired
 };

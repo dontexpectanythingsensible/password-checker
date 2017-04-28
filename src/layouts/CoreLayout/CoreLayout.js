@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import classnames from 'classnames';
 
@@ -6,8 +7,8 @@ import '../../styles/core.scss';
 
 export default class CoreLayout extends React.Component {
   static propTypes = {
-    strength: React.PropTypes.string,
-    children: React.PropTypes.element.isRequired
+    strength: PropTypes.string,
+    children: PropTypes.element.isRequired
   };
 
   render () {
