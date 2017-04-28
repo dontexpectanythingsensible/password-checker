@@ -34,6 +34,7 @@ export default class DateFormat extends React.Component {
   }
 
   toCenturies (ms) {
+    // ms in century
     let time = Math.floor(ms / 3154000000000);
     let suffix = 'centuries';
     if (time < 2) {
@@ -88,7 +89,10 @@ export default class DateFormat extends React.Component {
         time = moment.duration(time).humanize();
       }
 
-      return <div className='password__time'>It would take <span className='password__time-to-crack'>{ time }</span> to crack your password</div>;
+      return (
+        <div className='password__time'>It would take
+          <span className='password__time-to-crack'>{ time }</span> to crack your password</div>
+      );
     }
 
     return null;
