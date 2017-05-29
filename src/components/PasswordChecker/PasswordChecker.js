@@ -254,12 +254,13 @@ export default class PasswordChecker extends React.Component {
         <input className='password__checker' type='password'
           onChange={ this.handleChange } placeholder='Your password' />
 
+        <DateFormatter password={ this.state.password } />
+
         { this.state.password.length
           ? <div className='message__container'>{ Object.keys(this.state).map(this.renderErrors) }</div>
           : null
         }
 
-        <DateFormatter password={ this.state.password } />
       </div>
     );
   }

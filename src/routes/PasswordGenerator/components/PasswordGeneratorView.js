@@ -38,15 +38,17 @@ export default class PasswordGeneratorView extends React.Component {
         <Ad />
         <span className='password__generated'>{ this.state.password }</span>
 
-        <Slider
-          label='Password length'
-          step='1'
-          min='8'
-          max='64'
-          value={ this.state.amount }
-          onChange={ this.handleChange } />
+        <div className='password__controls'>
+          <Slider
+            label='Password length'
+            step='1'
+            min='8'
+            max='64'
+            value={ this.state.amount }
+            onChange={ this.handleChange } />
 
-        <button onClick={ this.generate } className='button'>Create another</button>
+          <button onClick={ this.generate } className='button'>Create another</button>
+        </div>
       </div>
     );
   }

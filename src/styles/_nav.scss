@@ -4,21 +4,25 @@
 
 .nav a {
     text-decoration: none;
-    background: #ddddde;
+    background: lighten($blue, 25%);
     color: black;
     width: 100%;
     display: inline-block;
     padding: 0.5rem 1rem;
+    max-width: $width / 2;
+    margin-bottom: 0.5rem;
 
     @media (min-width: 500px) {
         width: 48%;
     }
 
     &:hover {
-        background: $white;
+        color: $white;
+        background: darken($blue, 20%);
     }
 }
 
 .nav .route--active {
-    background: $white;
+    color: $white;
+    background: darken($blue, 20%);
 }
