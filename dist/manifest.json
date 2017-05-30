@@ -1,0 +1,11 @@
+{
+    "short_name": "Password Checker",
+    "name": "How Good Is My Password?",
+    "description": "Password strength checker with tips for improving passwords",
+    "icons": [],
+    "start_url": "./?utm_source=web_app_manifest",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#2f78c3",
+    "background_color": "#2f78c3"
+}
