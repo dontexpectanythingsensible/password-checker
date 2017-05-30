@@ -1,9 +1,4 @@
-# Check it out: http://humanstxt.org/
-
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    James Tease @whostolemyhat
 
-# THANKS
-
-    <name>
