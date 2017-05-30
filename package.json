@@ -100,6 +100,7 @@
     "moment": "^2.18.1",
     "node-sass": "^4.0.0",
     "normalize.css": "^5.0.0",
+    "offline-plugin": "^4.8.1",
     "postcss-loader": "^1.1.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",

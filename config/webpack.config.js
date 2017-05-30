@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const cssnano = require('cssnano');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 const project = require('./project.config');
 const debug = require('debug')('app:config:webpack');
 
@@ -63,6 +64,19 @@ webpackConfig.plugins = [
     inject   : 'body',
     minify   : {
       collapseWhitespace : true
+    }
+  }),
+  new OfflinePlugin({
+    publicPath: '/',
+    caches: {
+      main: [
+        'app.*.css',
+        'vendor.*.js',
+        'app.*.js'
+      ]
+    },
+    ServiceWorker: {
+      navigateFallbackURL: '/'
     }
   })
 ];
